@@ -21,12 +21,15 @@ const ImageUploader = () => {
     onSubmit(upImage);
   };
 
+  const onFileDropHandler = (file) => {
+    onSubmit(file);
+  };
+
   const onSubmit = (image) => {
     if (image === "") {
       console.log("ファイルが選択されていません");
     }
     // アップロード処理
-    console.log(image);
     setProcess(PROCESS.UPLOADING);
     const uploadTask = storage.ref(`/images/${image.name}`).put(image);
     uploadTask.on(
@@ -61,20 +64,26 @@ const ImageUploader = () => {
         .then((fireBaseUrl) => {
           setImageUrl(fireBaseUrl);
         });
-        
+
       setTimeout(() => {
         setProcess(PROCESS.DONE);
       }, 500);
     };
   };
 
-  let view = <Uploader onFileChanged={onFileChangeHandler} />;
+  let view = (
+    <Uploader
+      onFileDroped={onFileDropHandler}
+      onFileChanged={onFileChangeHandler}
+      isError={process === PROCESS.FAILED}
+    />
+  );
 
   if (process === PROCESS.UPLOADING) {
     view = <Uploading />;
   }
   if (process === PROCESS.DONE) {
-    view = <Uploaded imageUrl={imageUrl}  />;
+    view = <Uploaded imageUrl={imageUrl} />;
   }
 
   return <BaseCard>{view}</BaseCard>;

@@ -6,15 +6,18 @@ import styled from "styled-components";
 const inputAccept = "image/png, image/jpeg, image/gif";
 
 const Uploader = (props) => {
-  const {onFileChanged, onFileDroped} = props;
+  const {onFileChanged, onFileDroped, isError} = props;
+
+  let ErrorText = isError ? <StyledErrorText>Failed to upload.</StyledErrorText> : null;
 
   return (
     <StyledUploader>
       <Heading>Upload your image</Heading>
       <Text>File should be Jpeg, Png,...</Text>
+      {ErrorText}
 
       <DropAreaWrapper>
-        <DropArea></DropArea>
+        <DropArea droped={onFileDroped}></DropArea>
       </DropAreaWrapper>
 
       <TextLight>Or</TextLight>
@@ -34,6 +37,13 @@ const Heading = styled.h1`
   line-height: 27px;
   color: #4f4f4f;
   margin-bottom: 16px;
+`;
+
+const StyledErrorText = styled.p`
+  font-size: 10px;
+  line-height: 15px;
+  color: red;
+  margin-bottom: 30px;
 `;
 
 const Text = styled.p`

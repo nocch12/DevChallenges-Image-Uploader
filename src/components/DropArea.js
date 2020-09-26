@@ -1,15 +1,31 @@
-import React from 'react';
+import React, {useCallback} from 'react';
+import {useDropzone} from 'react-dropzone';
 
 import styled from "styled-components";
 
 import Icon from '../assets/image.svg';
 
-const DropArea = () => {
+const DropArea = (props) => {
+  const {droped} = props;
+
+  const onDrop = useCallback(acceptedFiles => {
+    if(acceptedFiles.length) {
+      const image = acceptedFiles[0];
+      droped(image);
+    }
+  }, [])
+  
+  const accept = "image/jpeg, image/png, image/gif";
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop, accept});
+
   return (
-    <StyledDropArea>
-      <StyledImage src={Icon} />
-      <Text>Drag & Drop your image here</Text>
-    </StyledDropArea>
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      <StyledDropArea>
+        <StyledImage src={Icon} />
+        <Text>Drag & Drop your image here</Text>
+      </StyledDropArea>
+    </div>
   );
 }
 
@@ -30,6 +46,7 @@ const Text = styled.p`
   line-height: 18px;
   letter-spacing: -0.035em;
   color: #BDBDBD;
+  cursor: default;
 `;
 
 export default DropArea;
