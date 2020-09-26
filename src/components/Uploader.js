@@ -5,7 +5,9 @@ import styled from "styled-components";
 
 const inputAccept = "image/png, image/jpeg, image/gif";
 
-const Uploader = () => {
+const Uploader = (props) => {
+  const {onFileChanged, onFileDroped} = props;
+
   return (
     <StyledUploader>
       <Heading>Upload your image</Heading>
@@ -16,7 +18,7 @@ const Uploader = () => {
       </DropAreaWrapper>
 
       <TextLight>Or</TextLight>
-      <FileInput id="fileUpload" type="file" accept={inputAccept} />
+      <FileInput id="fileUpload" type="file" accept={inputAccept} onChange={onFileChanged} />
       <Button htmlFor="fileUpload">Choose a file</Button>
     </StyledUploader>
   );

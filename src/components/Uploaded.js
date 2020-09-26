@@ -1,25 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const Uploaded = () => {
+const Uploaded = ({ imageUrl }) => {
   return (
     <StyledUploaded>
       <StyledIcon className="material-icons">check_circle</StyledIcon>
       <Heading>Uploaded Successfully!</Heading>
 
       <ImageArea>
-        <img src="https://whitewood-hp.com/web-tips/wp-content/uploads/2019/01/koala.jpg" />
-
+        <img src={imageUrl} />
       </ImageArea>
 
       <LinkArea>
-        <LinkText>https://images.unsplash.com/photo-14969508fadfsfawefaewf66446-325...</LinkText>
+        <LinkText>{imageUrl}</LinkText>
         <Button type="button">Copy Link</Button>
       </LinkArea>
     </StyledUploaded>
   );
-}
+};
 
 const StyledUploaded = styled.div`
   text-align: center;
@@ -53,8 +52,8 @@ const ImageArea = styled.div`
 `;
 
 const LinkArea = styled.div`
-  background: #F6F8FB;
-  border: 1px solid #E0E0E0;
+  background: #f6f8fb;
+  border: 1px solid #e0e0e0;
   box-sizing: border-box;
   border-radius: 8px;
   padding: 1px;
@@ -68,7 +67,7 @@ const LinkText = styled.p`
   font-size: 8px;
   line-height: 12px;
   letter-spacing: -0.035em;
-  color: #4F4F4F;
+  color: #4f4f4f;
   padding: 0 16px;
   overflow: hidden;
   text-overflow: ellipsis;
