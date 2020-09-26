@@ -9,7 +9,7 @@ const Uploaded = ({ imageUrl }) => {
       <Heading>Uploaded Successfully!</Heading>
 
       <ImageArea>
-        <img src={imageUrl} />
+        <img src={imageUrl} alt="uploaded" />
       </ImageArea>
 
       <LinkArea>

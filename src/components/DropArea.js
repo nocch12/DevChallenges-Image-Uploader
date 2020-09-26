@@ -13,7 +13,7 @@ const DropArea = (props) => {
       const image = acceptedFiles[0];
       droped(image);
     }
-  }, [])
+  }, [droped])
   
   const accept = "image/jpeg, image/png, image/gif";
   const {getRootProps, getInputProps} = useDropzone({onDrop, accept});
@@ -22,7 +22,7 @@ const DropArea = (props) => {
     <div {...getRootProps()}>
       <input {...getInputProps()} />
       <StyledDropArea>
-        <StyledImage src={Icon} alt="uploaded image" />
+        <StyledImage src={Icon} alt="uploading" />
         <Text>Drag & Drop your image here</Text>
       </StyledDropArea>
     </div>
