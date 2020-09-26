@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 
 import styled from "styled-components";
 
 const Uploaded = ({ imageUrl }) => {
+  const textRef = useRef(null);
+
+  const linkCopyHandler = useCallback(() => {
+    textRef.current.select();
+    document.execCommand("copy");
+  }, [textRef]);
+
   return (
     <StyledUploaded>
       <StyledIcon className="material-icons">check_circle</StyledIcon>
@@ -13,8 +20,10 @@ const Uploaded = ({ imageUrl }) => {
       </ImageArea>
 
       <LinkArea>
-        <LinkText>{imageUrl}</LinkText>
-        <Button type="button">Copy Link</Button>
+        <LinkText ref={textRef} value={imageUrl || 'aaaa'} type="text" readOnly="readonly" />
+        <Button type="button" onClick={linkCopyHandler}>
+          Copy Link
+        </Button>
       </LinkArea>
     </StyledUploaded>
   );
@@ -63,7 +72,9 @@ const LinkArea = styled.div`
   align-items: center;
 `;
 
-const LinkText = styled.p`
+const LinkText = styled.input`
+  background: transparent;
+  border: none;
   font-size: 8px;
   line-height: 12px;
   letter-spacing: -0.035em;
@@ -72,6 +83,11 @@ const LinkText = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  flex-grow: 1;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Button = styled.button`
