@@ -56,6 +56,8 @@ li {
   list-style: none;
 }
 
+
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 body {

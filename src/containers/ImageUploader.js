@@ -15,7 +15,7 @@ const ImageUploader = () => {
   const [process, setProcess] = useState(null);
 
 
-  let view = <Uploader />;
+  let view = <Uploaded />;
   if(process === PROCESS.UPLOADING) {
     view = <Uploading />;
   }
